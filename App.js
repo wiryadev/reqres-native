@@ -27,11 +27,11 @@ const CombinedDefaultTheme = {
 export default function App() {
   return (
     <PaperProvider theme={CombinedDefaultTheme}>
-      {/* <Provider store={store}> */}
+      <Provider store={store}>
         <NavigationContainer theme={CombinedDefaultTheme}>
           <Router />
         </NavigationContainer>
-      {/* </Provider> */}
+      </Provider>
     </PaperProvider>
   );
 }
