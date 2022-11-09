@@ -36,14 +36,14 @@ const LoginScreen = ({ navigation }) => {
         />
         <Spacer height={36} />
         <Button
-          mode="contained"
+          mode="contained-tonal"
           onPress={() => { }}
         >
           Login
         </Button>
         <Spacer height={16} />
         <Button
-          mode="outlined"
+          mode="text"
           onPress={() => navigation.navigate('RegisterScreen')}
         >
           Register
