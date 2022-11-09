@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   DefaultTheme as NavigationDefaultTheme, NavigationContainer
 } from '@react-navigation/native';
@@ -7,6 +8,7 @@ import {
   Provider as PaperProvider
 } from 'react-native-paper';
 import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
 import Router from './src/router';
 
 const { LightTheme } = adaptNavigationTheme({
@@ -25,11 +27,11 @@ const CombinedDefaultTheme = {
 export default function App() {
   return (
     <PaperProvider theme={CombinedDefaultTheme}>
-      <Provider store={store}>
+      {/* <Provider store={store}> */}
         <NavigationContainer theme={CombinedDefaultTheme}>
           <Router />
         </NavigationContainer>
-      </Provider>
+      {/* </Provider> */}
     </PaperProvider>
   );
 }

@@ -1,4 +1,9 @@
+// import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import React from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LoginScreen from "../screens/Auth/Login";
+import RegisterScreen from "../screens/Auth/Register";
+import HomeScreen from "../screens/Home";
 
 const Stack = createNativeStackNavigator()
 
@@ -8,7 +13,18 @@ const Router = () => (
             headerShown: false
         }}
     >
-        <Stack.Screen />
+        <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+        />
+        <Stack.Screen
+            name="RegisterScreen"
+            component={RegisterScreen}
+        />
+        <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+        />
 
     </Stack.Navigator>
 )
