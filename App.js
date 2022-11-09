@@ -1,14 +1,11 @@
 import {
-  NavigationContainer,
-  DefaultTheme as NavigationDefaultTheme,
+  DefaultTheme as NavigationDefaultTheme, NavigationContainer
 } from '@react-navigation/native';
 import {
   adaptNavigationTheme,
   MD3LightTheme,
-  Provider as PaperProvider,
+  Provider as PaperProvider
 } from 'react-native-paper';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
 import Router from './src/router';
 
@@ -28,7 +25,7 @@ const CombinedDefaultTheme = {
 export default function App() {
   return (
     <PaperProvider theme={CombinedDefaultTheme}>
-      <Provider>
+      <Provider store={store}>
         <NavigationContainer theme={CombinedDefaultTheme}>
           <Router />
         </NavigationContainer>
