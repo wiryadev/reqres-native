@@ -25,7 +25,6 @@ const Router = () => (
             name="HomeScreen"
             component={HomeScreen}
         />
-
     </Stack.Navigator>
 )
 

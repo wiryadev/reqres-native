@@ -3,8 +3,8 @@ import { View } from 'react-native'
 import { Appbar, Button, TextInput, useTheme } from 'react-native-paper'
 import Spacer from '../../../components/Spacer'
 
-const RegisterScreen = () => {
-  
+const RegisterScreen = ({ navigation }) => {
+
   const theme = useTheme()
 
   const [email, setEmail] = useState('')
