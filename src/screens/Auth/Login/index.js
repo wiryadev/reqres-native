@@ -4,6 +4,7 @@ import { Appbar, Button, TextInput, useTheme } from 'react-native-paper'
 import Spacer from '../../../components/Spacer'
 
 const LoginScreen = ({ navigation }) => {
+  
   const theme = useTheme()
 
   const [email, setEmail] = useState('')
@@ -20,7 +21,7 @@ const LoginScreen = ({ navigation }) => {
         />
       </Appbar.Header>
 
-      <View style={{ paddingHorizontal: 24, paddingTop: 16, }}>
+      <View style={{ paddingHorizontal: 24, paddingTop: 24, }}>
         <TextInput
           mode="outlined"
           label="Email"
@@ -32,9 +33,10 @@ const LoginScreen = ({ navigation }) => {
           mode="outlined"
           label="Password"
           value={password}
+          secureTextEntry
           onChangeText={text => setPassword(text)}
         />
-        <Spacer height={36} />
+        <Spacer height={48} />
         <Button
           mode="contained-tonal"
           onPress={() => { }}
