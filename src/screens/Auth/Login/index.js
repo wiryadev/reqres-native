@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Alert, View } from 'react-native'
 import { ActivityIndicator, Appbar, Button, TextInput, useTheme } from 'react-native-paper'
+import { useDispatch, useSelector } from 'react-redux'
 import Spacer from '../../../components/Spacer'
 import { useLoginMutation } from '../../../services/authApi'
 
@@ -8,8 +9,14 @@ const LoginScreen = ({ navigation }) => {
 
   const theme = useTheme()
 
+  const token = useSelector((state) => state.auth.token)
+  // console.log('isLoggedIn', isLoggedIn)
+  if (token != null) navigation.replace('HomeScreen')
+
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
 
   const [login, { isLoading }] = useLoginMutation()
   const onLoginClick = () => {
@@ -23,7 +30,6 @@ const LoginScreen = ({ navigation }) => {
         console.log('error', err)
         Alert.alert('Error', err.data.error)
       })
-
   }
 
   return (
