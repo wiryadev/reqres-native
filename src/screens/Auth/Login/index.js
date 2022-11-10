@@ -7,6 +7,7 @@ import { useLoginMutation } from '../../../services/authApi'
 const LoginScreen = ({ navigation }) => {
 
   const theme = useTheme()
+  console.log('login page loaded')
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -16,9 +17,11 @@ const LoginScreen = ({ navigation }) => {
     login({ email, password })
       .unwrap()
       .then((response) => {
+        console.log('response', response)
         navigation.navigate('HomeScreen')
       })
       .catch((err) => {
+        console.log('error', err)
         Alert.alert('Error', err.data.error)
       })
 
