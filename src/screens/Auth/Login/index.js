@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Alert, View } from 'react-native'
 import { ActivityIndicator, Appbar, Button, TextInput, useTheme } from 'react-native-paper'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Spacer from '../../../components/Spacer'
 import { useLoginMutation } from '../../../services/authApi'
 
@@ -10,11 +10,16 @@ const LoginScreen = ({ navigation }) => {
   const theme = useTheme()
 
   const token = useSelector((state) => state.auth.token)
-  if (token != null) navigation.replace('HomeScreen')
+
+  useEffect(() => {
+    if (token != null) {
+      navigation.replace('HomeScreen')
+    }
+  }, [token])
+  
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
 
   const [login, { isLoading }] = useLoginMutation()
   const onLoginClick = () => {
@@ -45,6 +50,9 @@ const LoginScreen = ({ navigation }) => {
           mode="outlined"
           label="Email"
           value={email}
+          autoCapitalize='none'
+          autoCorrect={false}
+          keyboardType='email-address'
           onChangeText={text => setEmail(text)}
         />
         <Spacer height={16} />

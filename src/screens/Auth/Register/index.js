@@ -47,6 +47,9 @@ const RegisterScreen = ({ navigation }) => {
           mode="outlined"
           label="Email"
           value={email}
+          autoCapitalize='none'
+          autoCorrect={false}
+          keyboardType='email-address'
           onChangeText={text => setEmail(text)}
         />
         <Spacer height={16} />

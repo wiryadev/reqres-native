@@ -1,5 +1,5 @@
 import { View, Text, FlatList } from 'react-native'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Appbar, useTheme } from 'react-native-paper'
 import UserItem from '../../components/UserItem'
 import { useGetUsersQuery } from '../../services/userApi'
@@ -17,10 +17,16 @@ const HomeScreen = ({ navigation }) => {
   const onLogout = useCallback(
     () => {
       dispatch(logoutAction())
-      navigation.replace('LoginScreen')
     },
     [],
   )
+
+  const token = useSelector((state) => state.auth.token)
+  useEffect(() => {
+    if (!token) {
+      navigation.replace('LoginScreen')
+    }
+  }, [token])
 
 
   return (
