@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { View } from 'react-native'
-import { Appbar, Button, TextInput, useTheme } from 'react-native-paper'
+import { Alert, View } from 'react-native'
+import { ActivityIndicator, Appbar, Button, TextInput, useTheme } from 'react-native-paper'
 import Spacer from '../../../components/Spacer'
+import { useRegisterMutation } from '../../../services/authApi'
 
 const RegisterScreen = ({ navigation }) => {
 
@@ -10,17 +11,38 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const [register, { isLoading }] = useRegisterMutation()
+  const onRegisterClick = () => {
+    register({ email, password })
+      .unwrap()
+      .then((response) => {
+        console.log('response', response)
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'HomeScreen'}]
+        })
+      })
+      .catch((err) => {
+        console.log('error', err)
+        Alert.alert('Error', err.data.error)
+      })
+
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header
         style={{ backgroundColor: theme.colors.primaryContainer }}
       >
+        <Appbar.BackAction
+          onPress={() => navigation.goBack()}
+        />
         <Appbar.Content
-          title="Login"
+          title="Register"
         />
       </Appbar.Header>
 
-      <View style={{ paddingHorizontal: 24, paddingTop: 24, }}>
+      <View style={{ paddingHorizontal: 24, paddingTop: 32, }}>
         <TextInput
           mode="outlined"
           label="Email"
@@ -36,12 +58,17 @@ const RegisterScreen = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
         />
         <Spacer height={48} />
-        <Button
-          mode="contained-tonal"
-          onPress={() => { }}
-        >
-          Register
-        </Button>
+        {isLoading
+          ? <ActivityIndicator
+            animating
+          />
+          : <Button
+            mode="contained-tonal"
+            onPress={onRegisterClick}
+          >
+            Register
+          </Button>
+        }
       </View>
     </View>
   )

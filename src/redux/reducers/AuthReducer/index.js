@@ -13,6 +13,13 @@ const AuthReducer = createReducer(initialState, (builder) => {
             token: action.payload.token,
         })
     )
+    builder.addMatcher(
+        authApi.endpoints.register.matchFulfilled,
+        (state, action) => ({
+            ...state,
+            token: action.payload.token,
+        })
+    )
 })
 
 export default AuthReducer
