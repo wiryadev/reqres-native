@@ -1,22 +1,35 @@
 import { View, Text, FlatList } from 'react-native'
-import React from 'react'
-import { Appbar } from 'react-native-paper'
+import React, { useCallback } from 'react'
+import { Appbar, useTheme } from 'react-native-paper'
 import UserItem from '../../components/UserItem'
 import { useGetUsersQuery } from '../../services/userApi'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutAction } from '../../redux/actions/AuthAction'
 
 const HomeScreen = ({ navigation }) => {
 
-  useGetUsersQuery()
+  const theme = useTheme()
 
+  useGetUsersQuery()
   const users = useSelector((state) => state.user.users)
+
+  const dispatch = useDispatch()
+  const onLogout = useCallback(
+    () => {
+      dispatch(logoutAction())
+      navigation.replace('LoginScreen')
+    },
+    [],
+  )
+
 
   return (
     <View style={{ flex: 1 }}>
-      <Appbar.Header      >
+      <Appbar.Header style={{ backgroundColor: theme.colors.primaryContainer }}    >
         <Appbar.Content
           title="Home"
         />
+        <Appbar.Action icon="location-exit" onPress={onLogout} />
       </Appbar.Header>
       <FlatList
         data={users || []}

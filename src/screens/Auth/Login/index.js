@@ -10,9 +10,7 @@ const LoginScreen = ({ navigation }) => {
   const theme = useTheme()
 
   const token = useSelector((state) => state.auth.token)
-  // console.log('isLoggedIn', isLoggedIn)
   if (token != null) navigation.replace('HomeScreen')
-
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
